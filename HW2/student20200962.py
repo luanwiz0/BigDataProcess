@@ -24,7 +24,7 @@ for row in ws:
 	sum += ws.cell(row = row_id, column = 5).value * 0.34
 	sum += ws.cell(row = row_id, column = 6).value
 	ws.cell(row = row_id, column = 7).value = sum
-	total_list.append(ws.cell(row = row_id, column = 7).value)
+	total_list.append(sum)
 	row_id += 1
 
 
@@ -46,7 +46,7 @@ if a_index != -1:
 		a_plus_index = -1
 if b_index != -1:
 	b_plus_index = check_index(total_list, int((a_index + b_index) * 0.5))
-c_plus_index = check_index(total_list, int((len(total_list) + b_index) * 0.5))
+c_plus_index = check_index(total_list, int(student_num - 1 + b_index) * 0.5))
 
 row_id = 2
 for row in ws:
