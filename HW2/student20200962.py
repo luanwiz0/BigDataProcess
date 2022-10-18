@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import openpyxl
-import sys
 
 def check_index(list, index):
 	while(list[index] == list[index + 1]):
