@@ -6,15 +6,15 @@ import operator
 import math
 
 def createDataSet():
- 	groupArr = []
+	groupArr = []
 	labels = []
 	for filename in os.listdir(sys.argv[1]):
 		with open(os.path.join(sys.argv[1], filename), 'r') as rf:
-			arr = []
-			for c in rf.read():
-				if c == '0' or c == '1':
-					arr.append(int(c))
-			groupArr.append(arr)
+			data = []
+			for line in rf:
+				data.append(line.strip())
+			data = "".join(data)
+			groupArr.append(list(map(int, data)))
 			labels.append(filename.split('_')[0])
 	group = np.array(groupArr)
 	return group, labels
@@ -41,14 +41,15 @@ for k in range(20):
 	failNum = 0
 	fileCount = 0
 	for filename in os.listdir(sys.argv[2]):
-		arr = []
+		data = []
 		with open(os.path.join(sys.argv[2], filename), 'r') as rf:
-			for c in rf.read():
-				if c == '0' or c == '1':
-					arr.append(int(c))
-		guessResult = classify0(arr, group, labels, k+1)
+			for line in rf:
+				data.append(line.strip())
+			data = "".join(data)
+		guessResult = classify0(list(map(int, data)), group, labels, k+1)
 		if guessResult != filename.split('_')[0]:
 			failNum += 1
 		fileCount += 1
-
+#		print(guessResult, filename)
+		
 	print(math.trunc(failNum / fileCount * 100))
